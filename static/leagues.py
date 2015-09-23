@@ -2,6 +2,7 @@ class Team(object):
 	def __init__(self, key, name):
 		self.key = key
 		self.name = name
+		self.file_name = '/' + key + '_' + name + '.json'
 
 
 class League(object):

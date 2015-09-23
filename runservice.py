@@ -18,12 +18,12 @@ def main():
 
 def run_scheduler(schedule):
 	pone()
-	schedule.enter(1000, 1, run_scheduler, (schedule,))
+	schedule.enter(7200, 1, run_scheduler, (schedule,))
 
 def pone():
 	for league in LEAGUES:
 		for team in league.teams:
-			parse_html_page_by_team(league.name, team.key, team.name)
+			parse_html_page_by_team(league.name, team.key, team.name, team.file_name)
 		# sport_name = sport.get('name', '')
 		# print sport_name
 		# teams_in_sport = sport.get('teams', [])

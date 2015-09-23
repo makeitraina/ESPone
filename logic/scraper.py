@@ -1,5 +1,7 @@
 import requests
+
 from lxml import html
+from storage import update_data
 
 BASE_ESPN_URL = "http://espn.go.com"
 
@@ -21,14 +23,14 @@ def get_first_child_element_attribute(parent, element_selector, attribute_select
 			
 	return attribute_val
 
-def parse_html_page_by_team(league, team_key, team_name):
+def parse_html_page_by_team(league, team_key, team_name, file_name):
 	team_template_url = '{0}/{1}/team/_/name/{2}/{3}'
-	team_url = team_template_url.format(BASE_ESPN_URL,league,team_key,team_name)
+	team_url = team_template_url.format(BASE_ESPN_URL,league,team_key,team_name,file_name)
 
+	scrape_result = {}
 	page = requests.get(team_url)
 	page_html = html.fromstring(page.text)
 	articles = page_html.cssselect('div#news-feed-content article')
-
 	for article in articles:
 		article_details = []
 
@@ -46,4 +48,13 @@ def parse_html_page_by_team(league, team_key, team_name):
 		article_details.append(get_first_child_element_attribute(main_body, 'p', 'text()'))
 		if "" in article_details:
 			continue
-		print '--'.join(article_details) + '\n'
+		
+		scrape_result[article_details[0]] = {
+			'url': article_details[1],
+			'image_url': article_details[2],
+			'description': article_details[3]
+		}
+
+	new_data = update_data(scrape_result, league + file_name)
+	print new_data
+		# print '--'.join(article_details) + '\n'
