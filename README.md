@@ -1,6 +1,6 @@
 # ESPone
 
-Pone the ESPN website to store useful sports data
+Pone the ESPN website to store useful sports data.
 
 ## What this project is about
 
