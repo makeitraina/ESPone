@@ -1,14 +1,10 @@
 """Gather sports content from ESPN"""
 import sys
-# add paths
-sys.path.append('static')
-sys.path.append('logic')
-
 import sched
 import time
 
-from leagues import LEAGUES
-from scraper import parse_html_page_by_team
+from static.leagues import LEAGUES
+from logic.scraper import parse_html_page_by_team
 
 def main():
     # start the scheduler
