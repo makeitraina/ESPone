@@ -3,6 +3,7 @@ import sys
 import sched
 import time
 
+from server import run
 from static.leagues import LEAGUES
 from logic.scraper import parse_html_page_by_team
 
@@ -29,4 +30,5 @@ def pone():
   #   		parse_html_page_by_team(sport_name, team_data)
 
 if __name__ == '__main__':
+    run_server()
     main()
